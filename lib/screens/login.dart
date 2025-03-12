@@ -49,142 +49,151 @@ class _LoginState extends State<Login> {
                       elevation: 4,
                       shadowColor: Colors.black26,
                       color: Colors.white.withOpacity(0.9),
-                      child: Padding(
-                        padding: const EdgeInsets.all(30.0),
-                        child: Form(
-                          key: _formKey,
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              const Text(
-                                'Bienvenido a  tofooooooooooooooooooooooooHandApp',
-                                style: TextStyle(
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black, // Letra en negro
-                                ),
-                              ),
-                              const SizedBox(height: 25),
-
-                              // Campo de Email
-                              TextFormField(
-                                controller: _emailController,
-                                validator: (value) {
-                                  final emailRegExp = RegExp(
-                                      r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
-                                  if (value == null ||
-                                      value.isEmpty ||
-                                      !emailRegExp.hasMatch(value)) {
-                                    return 'Correo electrónico inválido';
-                                  }
-                                  return null;
-                                },
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  fillColor: Colors.grey[200],
-                                  hintText: "E-mail",
-                                  hintStyle: const TextStyle(
-                                      color: Colors.black), // Letra en negro
-                                  prefixIcon: const Icon(Icons.email,
-                                      color: Colors.teal),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(12),
-                                    borderSide: BorderSide.none,
+                      child: SizedBox(
+                        width: 320, // Reducido el ancho
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 40, horizontal: 30), // Más alto
+                          child: Form(
+                            key: _formKey,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                const Text(
+                                  'Bienvenido a HandApp',
+                                  style: TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black, // Letra en negro
                                   ),
                                 ),
-                              ),
+                                const SizedBox(height: 25),
 
-                              const SizedBox(height: 15),
+                                // Campo de Email
+                                TextFormField(
+                                  controller: _emailController,
+                                  style: const TextStyle(
+                                      color: Colors.black), // Texto en negro
+                                  validator: (value) {
+                                    final emailRegExp = RegExp(
+                                        r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+                                    if (value == null ||
+                                        value.isEmpty ||
+                                        !emailRegExp.hasMatch(value)) {
+                                      return 'Correo electrónico inválido';
+                                    }
+                                    return null;
+                                  },
+                                  decoration: InputDecoration(
+                                    filled: true,
+                                    fillColor: Colors.grey[200],
+                                    hintText: "E-mail",
+                                    hintStyle:
+                                        const TextStyle(color: Colors.black),
+                                    prefixIcon: const Icon(Icons.email,
+                                        color: Colors.teal),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                      borderSide: BorderSide.none,
+                                    ),
+                                  ),
+                                ),
 
-                              // Campo de Contraseña con Toggle
-                              TextFormField(
-                                controller: _passwordController,
-                                obscureText: !_isPasswordVisible,
-                                validator: (value) {
-                                  if (value == null || value.length < 6) {
-                                    return 'La contraseña debe tener al menos 6 caracteres';
-                                  }
-                                  return null;
-                                },
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  fillColor: Colors.grey[200],
-                                  hintText: "Contraseña",
-                                  hintStyle: const TextStyle(
-                                      color: Colors.black), // Letra en negro
-                                  prefixIcon: const Icon(Icons.lock,
-                                      color: Colors.teal),
-                                  suffixIcon: IconButton(
-                                    icon: Icon(
-                                      _isPasswordVisible
-                                          ? Icons.visibility
-                                          : Icons.visibility_off,
-                                      color: Colors.teal,
+                                const SizedBox(height: 15),
+
+                                // Campo de Contraseña con Toggle
+                                TextFormField(
+                                  controller: _passwordController,
+                                  style: const TextStyle(
+                                      color: Colors.black), // Texto en negro
+                                  obscureText: !_isPasswordVisible,
+                                  validator: (value) {
+                                    if (value == null || value.length < 6) {
+                                      return 'La contraseña debe tener al menos 6 caracteres';
+                                    }
+                                    return null;
+                                  },
+                                  decoration: InputDecoration(
+                                    filled: true,
+                                    fillColor: Colors.grey[200],
+                                    hintText: "Contraseña",
+                                    hintStyle:
+                                        const TextStyle(color: Colors.black),
+                                    prefixIcon: const Icon(Icons.lock,
+                                        color: Colors.teal),
+                                    suffixIcon: IconButton(
+                                      icon: Icon(
+                                        _isPasswordVisible
+                                            ? Icons.visibility
+                                            : Icons.visibility_off,
+                                        color: Colors.teal,
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          _isPasswordVisible =
+                                              !_isPasswordVisible;
+                                        });
+                                      },
+                                    ),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(12),
+                                      borderSide: BorderSide.none,
+                                    ),
+                                  ),
+                                ),
+
+                                const SizedBox(height: 20),
+
+                                // Botón de acceso con animación
+                                SizedBox(
+                                  width: double.infinity,
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.teal,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 14),
+                                      elevation: 4,
                                     ),
                                     onPressed: () {
-                                      setState(() {
-                                        _isPasswordVisible =
-                                            !_isPasswordVisible;
-                                      });
-                                    },
-                                  ),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(12),
-                                    borderSide: BorderSide.none,
-                                  ),
-                                ),
-                              ),
+                                      if (_formKey.currentState?.validate() ??
+                                          false) {
+                                        String email = _emailController.text;
+                                        String password =
+                                            _passwordController.text;
 
-                              const SizedBox(height: 20),
-
-                              // Botón de acceso con animación
-                              SizedBox(
-                                width: double.infinity,
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.teal,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 14),
-                                    elevation: 4,
-                                  ),
-                                  onPressed: () {
-                                    if (_formKey.currentState?.validate() ??
-                                        false) {
-                                      String email = _emailController.text;
-                                      String password =
-                                          _passwordController.text;
-
-                                      if (email == 'admin@example.com' &&
-                                          password == 'admin123') {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
+                                        if (email == 'admin@example.com' &&
+                                            password == 'admin123') {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
                                               builder: (context) =>
-                                                  const HomeScreen()),
-                                        );
-                                      } else {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          const SnackBar(
-                                            content: Text(
-                                                'Usuario o contraseña incorrectos'),
-                                            backgroundColor: Colors.red,
-                                          ),
-                                        );
+                                                  const HomeScreen(),
+                                            ),
+                                          );
+                                        } else {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            const SnackBar(
+                                              content: Text(
+                                                  'Usuario o contraseña incorrectos'),
+                                              backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        }
                                       }
-                                    }
-                                  },
-                                  child: const Text(
-                                    'Iniciar Sesión',
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 18),
+                                    },
+                                    child: const Text(
+                                      'Iniciar Sesión',
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 18),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ),
